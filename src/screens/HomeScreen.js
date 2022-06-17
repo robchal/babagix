@@ -1,7 +1,8 @@
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet, Pressable, FlatList } from "react-native";
 import { useState } from "react";
 import { colors, gap } from "../global/styles";
 import { Icon } from "react-native-elements";
+import CardItem from "../components/CardItem";
 
 const HomeScreen = () => {
   const [gratisScreen, setGratisScreen] = useState(true);
@@ -78,6 +79,23 @@ const HomeScreen = () => {
           />
         </Pressable>
       </View>
+
+      {/* card item list */}
+      <View style={styles.hSCardContainer}>
+        <FlatList
+          data={[1, 2, 3, 4, 5, 6, 7]}
+          renderItem={(items, index) => {
+            return <CardItem />;
+          }}
+          keyExtractor={(item, index) => {
+            return index;
+          }}
+          showsVerticalScrollIndicator={false}
+          style={{
+            marginBottom: 10,
+          }}
+        />
+      </View>
     </View>
   );
 };
@@ -149,5 +167,9 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginLeft: 7,
     color: colors.secondaryText2,
+  },
+  hSCardContainer: {
+    paddingTop: 10,
+    flex: 1,
   },
 });
