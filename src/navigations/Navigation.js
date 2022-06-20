@@ -10,7 +10,10 @@ const Navigation = (props) => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home" component={TabNavigation}></Stack.Screen>
+        <Stack.Screen
+          name="TabNavigation"
+          component={TabNavigation}
+        ></Stack.Screen>
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>

@@ -3,26 +3,20 @@ import React from "react";
 import { Icon } from "react-native-elements";
 import { colors, shadow } from "../global/styles";
 
-const CardItem = () => {
+const CardItem = (props) => {
   return (
     <View style={styles.cardItemContainer}>
-      <Image
-        source={require("../../assets/fetucini.jpg")}
-        style={styles.imageCard}
-      />
+      <Image source={props.image} style={styles.imageCard} />
       <View>
         <Text
-          style={{ fontSize: 13, fontWeight: "500", color: colors.primaryText }}
+          style={{ fontSize: 14, fontWeight: "500", color: colors.primaryText }}
         >
-          Fetucini Carbonara
+          {props.itemName}
         </Text>
         <View style={styles.userCardDetail}>
-          <Image
-            source={require("../../assets/ava.png")}
-            style={styles.avaImageCard}
-          />
-          <Text style={{ fontSize: 11, color: colors.secondaryText }}>
-            Jhon Doe
+          <Image source={props.userAva} style={styles.avaImageCard} />
+          <Text style={{ fontSize: 12, color: colors.secondaryText }}>
+            {props.username}
           </Text>
         </View>
         <View style={styles.cardDetailItemContainer}>
@@ -30,34 +24,34 @@ const CardItem = () => {
             <Icon
               type="material-community"
               name="map-marker-outline"
-              size={11}
+              size={15}
               color={colors.secondaryText2}
             />
             <Text
               style={{
-                fontSize: 9,
+                fontSize: 11,
                 color: colors.secondaryText2,
                 marginLeft: 2,
               }}
             >
-              120km
+              {props.location}
             </Text>
           </View>
           <View style={styles.cardDetailItem}>
             <Icon
               type="material-community"
               name="cards-heart-outline"
-              size={11}
+              size={15}
               color={colors.secondaryText2}
             />
             <Text
               style={{
-                fontSize: 9,
+                fontSize: 11,
                 color: colors.secondaryText2,
                 marginLeft: 2,
               }}
             >
-              15
+              {props.loved}
             </Text>
           </View>
         </View>

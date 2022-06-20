@@ -8,6 +8,7 @@ export const colors = {
   secondaryText: "#779379",
   secondaryText2: "#2f442c",
   line: "#d7d8d6",
+  activeCategory: "#B23BB8",
 };
 
 export const shadow = {
