@@ -6,7 +6,8 @@ import {
   FlatList,
   ScrollView,
 } from "react-native";
-import { useState } from "react";
+import * as React from "react";
+import * as Location from "expo-location";
 import { Icon } from "react-native-elements";
 import { shuffleArray } from "../helpers/shuffledArray";
 import {
@@ -19,30 +20,103 @@ import { colors, gap, gratisMakanan, gratisNonmakanan } from "../global";
 
 const HomeScreen = () => {
   const shuffleData = shuffleArray(gratisMakanan, gratisNonmakanan);
-  const [dataRendered, setDataRendered] = useState(shuffleData);
-  const [activeSection, setActiveSection] = useState([
+  const [dataRendered, setDataRendered] = React.useState(shuffleData);
+  const [activeSection, setActiveSection] = React.useState([
     "hSActiveNavigationHeader",
     "hSNotActiveNavigationHeader",
   ]);
-
-  const [region, setRegion] = useState({
+  const [errorMsg, setErrorMsg] = React.useState("");
+  const [position, setPosition] = React.useState({
     latitude: parseFloat(-6.387875),
     longitude: parseFloat(105.854439),
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   });
 
-  const [activeCategorySection, setActiveCategorySection] = useState([
+  const [activeCategorySection, setActiveCategorySection] = React.useState([
     colors.secondaryText2,
     colors.secondaryText2,
     colors.secondaryText2,
   ]);
 
+  const _map = React.useRef(1);
+  //user location useeffect
+  // React.useEffect(() => {
+  //   (async () => {
+  //     let { status } = await Location.requestForegroundPermissionsAsync();
+  //     if (status !== "granted") {
+  //       setErrorMsg("Permission to access location was denied");
+  //       return getLocation;
+  //     }
+  //     foregroundSubscrition = Location.watchPositionAsync(
+  //       {
+  //         // Tracking options
+  //         accuracy: Location.Accuracy.High,
+  //         distanceInterval: 10,
+  //       },
+  //       (location) => {
+  //         // console.log(location);
+  //         let cor = {
+  //           latitude: location.coords.latitude,
+  //           longitude: location.coords.longitude,
+  //         };
+  //         setPosition({
+  //           ...cor,
+  //           latitudeDelta: 0.0922,
+  //           longitudeDelta: 0.0421,
+  //         });
+  //       }
+  //     );
+  //   })();
+  // }, []);
+
   // active section handler
+
+  //another example to use permission
+  const checkPermission = async () => {
+    const permissionStatus = await Location.requestForegroundPermissionsAsync();
+    if (permissionStatus.status === "granted") {
+      const permission = await askPermission();
+      return permission;
+    }
+    return;
+  };
+
+  const askPermission = async () => {
+    const permission = await Location.requestForegroundPermissionsAsync();
+    return permission.status === "granted";
+  };
+
+  const getLocation = async () => {
+    try {
+      const { granted } = await Location.requestForegroundPermissionsAsync();
+      if (!granted) {
+        return;
+      }
+      const {
+        coords: { latitude, longitude },
+      } = await Location.getCurrentPositionAsync();
+      setPosition({ ...position, latitude, longitude });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  React.useEffect(() => {
+    checkPermission();
+    getLocation();
+    console.log(position);
+  }, []);
+  //  screen handler
   function gratisScreenHandler() {
     setActiveSection([
       "hSActiveNavigationHeader",
       "hSNotActiveNavigationHeader",
+    ]);
+    setActiveCategorySection([
+      colors.secondaryText2,
+      colors.secondaryText2,
+      colors.secondaryText2,
     ]);
     setDataRendered(shuffleData);
   }
@@ -51,6 +125,11 @@ const HomeScreen = () => {
     setActiveSection([
       "hSNotActiveNavigationHeader",
       "hSActiveNavigationHeader",
+    ]);
+    setActiveCategorySection([
+      colors.secondaryText2,
+      colors.secondaryText2,
+      colors.secondaryText2,
     ]);
     setDataRendered(shuffleData);
   }
@@ -142,7 +221,7 @@ const HomeScreen = () => {
               marginBottom: 30,
               paddingBottom: 50,
             }}
-            ListFooterComponent={<MapViews region={region} />}
+            ListFooterComponent={<MapViews region={position} mapRef={_map} />}
           />
         )}
       </View>

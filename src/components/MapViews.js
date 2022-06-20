@@ -7,9 +7,11 @@ const MapViews = (props) => {
   return (
     <View style={styles.container}>
       <MapView
+        ref={props.mapRef}
         showsUserLocation={true}
         followsUserLocation={true}
         style={styles.map}
+        initialRegion={props.region}
       />
     </View>
   );
