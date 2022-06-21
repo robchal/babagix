@@ -11,7 +11,6 @@ const MapViews = (props) => {
         showsUserLocation={true}
         followsUserLocation={true}
         style={styles.map}
-        initialRegion={props.region}
       />
     </View>
   );

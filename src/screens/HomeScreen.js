@@ -5,6 +5,7 @@ import {
   Pressable,
   FlatList,
   ScrollView,
+  Button,
 } from "react-native";
 import * as React from "react";
 import * as Location from "expo-location";
@@ -26,12 +27,7 @@ const HomeScreen = () => {
     "hSNotActiveNavigationHeader",
   ]);
   const [errorMsg, setErrorMsg] = React.useState("");
-  const [position, setPosition] = React.useState({
-    latitude: parseFloat(-6.387875),
-    longitude: parseFloat(105.854439),
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
-  });
+  const [position, setPosition] = React.useState({});
 
   const [activeCategorySection, setActiveCategorySection] = React.useState([
     colors.secondaryText2,
@@ -39,7 +35,7 @@ const HomeScreen = () => {
     colors.secondaryText2,
   ]);
 
-  const _map = React.useRef(1);
+  const _map = React.useRef();
   //user location useeffect
   // React.useEffect(() => {
   //   (async () => {
@@ -96,7 +92,12 @@ const HomeScreen = () => {
       const {
         coords: { latitude, longitude },
       } = await Location.getCurrentPositionAsync();
-      setPosition({ ...position, latitude, longitude });
+      setPosition({
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+        latitude,
+        longitude,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -160,6 +161,10 @@ const HomeScreen = () => {
       colors.activeCategory,
     ]);
   }
+
+  const goToMyLocation = async () => {
+    _map.current.animateToRegion(position, 2000);
+  };
   return (
     <View style={styles.homeScreenContainer}>
       {/* screen header */}
@@ -196,7 +201,7 @@ const HomeScreen = () => {
         style3={activeCategorySection[2]}
       />
       {/* card item list */}
-
+      <Button title="show map" onPress={goToMyLocation} />
       <View style={styles.hSCardContainer}>
         {dataRendered && (
           <FlatList
