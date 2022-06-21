@@ -120,3 +120,12 @@ export const gratisNonmakanan = [
     loved: 78,
   },
 ];
+
+export const freeAroundYou = [
+  { longitude: 105.828171, latitude: -6.372625 },
+  { longitude: 105.83122, latitude: -6.374502 },
+  { longitude: 105.829372, latitude: -6.372903 },
+  { longitude: 105.829974, latitude: -6.373351 },
+  { longitude: 105.831649, latitude: -6.372903 },
+  { longitude: 105.829651, latitude: -6.372071 },
+];

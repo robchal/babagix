@@ -4,6 +4,7 @@ import { Icon } from "react-native-elements";
 import HomeScreen from "../screens/HomeScreen";
 import { colors } from "../global/styles";
 import CardItem from "../components/CardItem";
+import MapScreen from "../screens/MapScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -36,7 +37,7 @@ const TabNavigation = () => {
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Map" component={CardItem} />
+      <Tab.Screen name="Map" component={MapScreen} />
     </Tab.Navigator>
   );
 };

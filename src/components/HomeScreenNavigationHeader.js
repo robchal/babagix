@@ -1,15 +1,36 @@
+import { useState } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { colors } from "../global/styles";
 
 const HomeScreenNavigationHeader = (props) => {
-  const { gratisScreenHandler, pinjamScreenHandler, style1, style2 } = props;
+  const [screenNavigationStyle, setScreenNavigationStyle] = useState([
+    "activeNavigationHeader",
+    "notActiveNavigationHeader",
+  ]);
+
+  function gratisScreenHandler() {
+    setScreenNavigationStyle([
+      "activeNavigationHeader",
+      "notActiveNavigationHeader",
+    ]);
+    props.dataShown([...props.dataSend]);
+  }
+
+  function pinjamScreenHandler() {
+    setScreenNavigationStyle([
+      "notActiveNavigationHeader",
+      "activeNavigationHeader",
+    ]);
+    props.dataShown([...props.dataSend]);
+  }
+
   return (
-    <View style={styles.hSNavigationHeader}>
+    <View style={styles.navigationHeader}>
       <Pressable onPress={gratisScreenHandler} style={{ marginRight: 30 }}>
-        <Text style={styles[style1]}>Gratis</Text>
+        <Text style={styles[screenNavigationStyle[0]]}>Gratis</Text>
       </Pressable>
       <Pressable onPress={pinjamScreenHandler}>
-        <Text style={styles[style2]}>Pinjam</Text>
+        <Text style={styles[screenNavigationStyle[1]]}>Pinjam</Text>
       </Pressable>
     </View>
   );
@@ -18,19 +39,19 @@ const HomeScreenNavigationHeader = (props) => {
 export default HomeScreenNavigationHeader;
 
 const styles = StyleSheet.create({
-  hSNavigationHeader: {
+  navigationHeader: {
     flexDirection: "row",
     marginTop: 10,
     paddingVertical: 10,
   },
-  hSNotActiveNavigationHeader: {
+  notActiveNavigationHeader: {
     color: colors.secondaryText,
     fontWeight: "500",
     fontSize: 17,
     paddingBottom: 10,
     paddingRight: 5,
   },
-  hSActiveNavigationHeader: {
+  activeNavigationHeader: {
     color: colors.primaryText,
     fontWeight: "500",
     fontSize: 17,
