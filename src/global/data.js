@@ -1,6 +1,7 @@
-export const gratisMakanan = [
+export const itemDatas = [
   {
     id: Math.random().toString(),
+    category_id: 1,
     image: require("../../assets/fetucini.jpg"),
     itemName: "Fetucin",
     userAva: require("../../assets/ava.png"),
@@ -10,6 +11,7 @@ export const gratisMakanan = [
   },
   {
     id: Math.random().toString(),
+    category_id: 1,
     image: require("../../assets/piza.webp"),
     itemName: "1 Slice Pizza",
     userAva: require("../../assets/ava1.png"),
@@ -19,6 +21,7 @@ export const gratisMakanan = [
   },
   {
     id: Math.random().toString(),
+    category_id: 1,
     itemName: "Letuce Salad",
     image: require("../../assets/burger1.jpg"),
     userAva: require("../../assets/ava2.png"),
@@ -28,6 +31,7 @@ export const gratisMakanan = [
   },
   {
     id: Math.random().toString(),
+    category_id: 1,
     image: require("../../assets/burger2.webp"),
     itemName: "Beef Burger with Cheese",
     userAva: require("../../assets/ava3.png"),
@@ -37,6 +41,7 @@ export const gratisMakanan = [
   },
   {
     id: Math.random().toString(),
+    category_id: 1,
     image: require("../../assets/burger1.jpg"),
     itemName: "Sloppy Joe with Beef Patty",
     userAva: require("../../assets/ava4.png"),
@@ -44,11 +49,9 @@ export const gratisMakanan = [
     location: 87,
     loved: 56,
   },
-];
-
-export const gratisNonmakanan = [
   {
     id: Math.random().toString(),
+    category_id: 2,
     image: require("../../assets/nonmakanan/ball.jpg"),
     itemName: "Bola Voli Merk Vector",
     userAva: require("../../assets/ava.png"),
@@ -58,6 +61,7 @@ export const gratisNonmakanan = [
   },
   {
     id: Math.random().toString(),
+    category_id: 2,
     image: require("../../assets/nonmakanan/jaket.webp"),
     itemName: "Jaket Boomber Like New",
     userAva: require("../../assets/ava1.png"),
@@ -67,6 +71,7 @@ export const gratisNonmakanan = [
   },
   {
     id: Math.random().toString(),
+    category_id: 2,
     image: require("../../assets/nonmakanan/pukul.webp"),
     itemName: "Baseball Bat Warna Hitam",
     userAva: require("../../assets/ava2.png"),
@@ -76,6 +81,7 @@ export const gratisNonmakanan = [
   },
   {
     id: Math.random().toString(),
+    category_id: 2,
     image: require("../../assets/nonmakanan/shirtAnime.webp"),
     itemName: "Kaos Anime Warna Hitam",
     userAva: require("../../assets/ava3.png"),
@@ -85,6 +91,7 @@ export const gratisNonmakanan = [
   },
   {
     id: Math.random().toString(),
+    category_id: 2,
     image: require("../../assets/nonmakanan/shoe1.webp"),
     itemName: "Sneaker Colorful",
     userAva: require("../../assets/ava4.png"),
@@ -94,6 +101,7 @@ export const gratisNonmakanan = [
   },
   {
     id: Math.random().toString(),
+    category_id: 2,
     image: require("../../assets/nonmakanan/jaket2.webp"),
     itemName: "Jaket Lorcyful Bliss",
     userAva: require("../../assets/ava2.png"),
@@ -103,6 +111,7 @@ export const gratisNonmakanan = [
   },
   {
     id: Math.random().toString(),
+    category_id: 2,
     image: require("../../assets/nonmakanan/shoe3.jpg"),
     itemName: "Sneaker Air Jordan Full Color",
     userAva: require("../../assets/ava3.png"),
@@ -112,6 +121,7 @@ export const gratisNonmakanan = [
   },
   {
     id: Math.random().toString(),
+    category_id: 2,
     image: require("../../assets/nonmakanan/shoe3.webp"),
     itemName: "Sneaker basketBall Series 1",
     userAva: require("../../assets/ava4.png"),

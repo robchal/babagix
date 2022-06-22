@@ -1,4 +1,4 @@
-import { gratisMakanan, gratisNonmakanan, freeAroundYou } from "./data";
+import { itemDatas, freeAroundYou } from "./data";
 import { gap, colors, shadow } from "./styles";
 
-export { gratisMakanan, gratisNonmakanan, gap, colors, shadow, freeAroundYou };
+export { itemDatas, gap, colors, shadow, freeAroundYou };

@@ -7,20 +7,12 @@ import {
   HomeScreenCategoryFilter,
   HomeScreenNavigationHeader,
 } from "../components";
-import { colors, gap, gratisMakanan, gratisNonmakanan } from "../global";
+import { colors, gap, itemDatas } from "../global";
 
 const HomeScreen = () => {
-  const shuffleData = shuffleArray(gratisMakanan, gratisNonmakanan);
-  const [dataRendered, setDataRendered] = React.useState(shuffleData);
-  const [foodCategoryIsActive, setFoodCategoryIsActive] = React.useState(false);
-  const [nonFoodCategoryIsActive, setNonFoodCategoryIsActive] =
-    React.useState(false);
-
-  const [activeCategorySection, setActiveCategorySection] = React.useState([
-    colors.secondaryText2,
-    colors.secondaryText2,
-    colors.secondaryText2,
-  ]);
+  const shuffleData = shuffleArray(itemDatas);
+  const [dataRendered, setDataRendered] = React.useState(itemDatas);
+  const [resetActiveCategory, setResetActiveCategory] = React.useState(false);
 
   return (
     <View style={styles.homeScreenContainer}>
@@ -44,13 +36,10 @@ const HomeScreen = () => {
       <HomeScreenNavigationHeader
         dataSend={shuffleData}
         dataShown={(data) => setDataRendered(data)}
+        resetActiveCategory={(data) => setResetActiveCategory(data)}
       />
       {/* category filter */}
 
-      <HomeScreenCategoryFilter
-        dataSend={[gratisMakanan, gratisNonmakanan]}
-        dataShown={(data) => setDataRendered(data)}
-      />
       {/* card item list */}
 
       <View style={styles.hSCardContainer}>
