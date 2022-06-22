@@ -9,6 +9,7 @@ export const colors = {
   secondaryText2: "#2f442c",
   line: "#d7d8d6",
   activeCategory: "#B23BB8",
+  alernative: "#888",
 };
 
 export const shadow = {
@@ -19,6 +20,5 @@ export const shadow = {
   },
   shadowOpacity: 0.23,
   shadowRadius: 2.62,
-
   elevation: 4,
 };

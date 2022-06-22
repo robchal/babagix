@@ -6,6 +6,7 @@ import { colors } from "../global";
 
 const { width, height } = Dimensions.get("window");
 const MapViews = (props) => {
+  console.log(props);
   return (
     <View style={styles.container}>
       <MapView
@@ -38,13 +39,14 @@ export default MapViews;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    paddingTop: 30,
+    paddingHorizontal: 30,
+    marginBottom: 40,
+    paddingBottom: 50,
   },
   map: {
-    width,
-    height: height,
+    width: width * 0.92,
+    height: height * 0.4,
   },
 });

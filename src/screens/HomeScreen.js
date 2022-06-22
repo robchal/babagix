@@ -2,16 +2,12 @@ import { View, Text, StyleSheet, Pressable, FlatList } from "react-native";
 import * as React from "react";
 import { Icon } from "react-native-elements";
 import { shuffleArray } from "../helpers/shuffledArray";
-import {
-  CardItem,
-  HomeScreenCategoryFilter,
-  HomeScreenNavigationHeader,
-} from "../components";
+import { CardItem, HomeScreenNavigationHeader } from "../components";
 import { colors, gap, itemDatas } from "../global";
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   const shuffleData = shuffleArray(itemDatas);
-  const [dataRendered, setDataRendered] = React.useState(itemDatas);
+  const [dataRendered, setDataRendered] = React.useState(shuffleData);
   const [resetActiveCategory, setResetActiveCategory] = React.useState(false);
 
   return (
@@ -38,11 +34,23 @@ const HomeScreen = () => {
         dataShown={(data) => setDataRendered(data)}
         resetActiveCategory={(data) => setResetActiveCategory(data)}
       />
-      {/* category filter */}
 
       {/* card item list */}
 
       <View style={styles.hSCardContainer}>
+        <View style={styles.cardItemHeaderContainer}>
+          <Text style={styles.cardItemHeader}>Disekitar kamu</Text>
+          <View></View>
+        </View>
+
+        {!dataRendered && (
+          <View>
+            <Text style={styles.emptyListItemMsg}>
+              Belum ada barang yang dibagikan disekitar kamu sekarang, kenapa
+              tidak jadi yang pertama ?
+            </Text>
+          </View>
+        )}
         {dataRendered && (
           <FlatList
             data={dataRendered}
@@ -55,6 +63,7 @@ const HomeScreen = () => {
                   userAva={items.item.userAva}
                   location={items.item.location}
                   loved={items.item.loved}
+                  navigate={(data) => navigation.navigate(data)}
                 />
               );
             }}
@@ -106,5 +115,25 @@ const styles = StyleSheet.create({
   hSCardContainer: {
     paddingTop: 10,
     flex: 5,
+  },
+  cardItemHeaderContainer: {
+    backgroundColor: colors.activeCategory,
+    alignSelf: "flex-start",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 4,
+    marginBottom: 10,
+  },
+  cardItemHeader: {
+    fontSize: 13,
+    color: "#fff",
+    fontWeight: "500",
+  },
+  emptyListItemMsg: {
+    fontWeight: "500",
+    fontSize: 18,
+    textAlign: "center",
+    color: "#d3d3d3",
+    paddingVertical: 20,
   },
 });

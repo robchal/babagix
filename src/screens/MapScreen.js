@@ -7,7 +7,7 @@ import * as Location from "expo-location";
 
 const { width, height } = Dimensions.get("window");
 
-const MapScreen = (props) => {
+const MapScreen = () => {
   const [position, setPosition] = React.useState({
     latitudeDelta: 0.008,
     longitudeDelta: 0.008,
@@ -102,7 +102,6 @@ const MapScreen = (props) => {
 
   return (
     <View style={styles.container}>
-      <Button title="klik" onPress={goToMyLocation} />
       <MapView
         ref={_map}
         showsUserLocation={true}

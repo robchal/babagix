@@ -1,11 +1,14 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, Pressable } from "react-native";
 import React from "react";
 import { Icon } from "react-native-elements";
 import { colors, shadow } from "../global/styles";
 
 const CardItem = (props) => {
   return (
-    <View style={styles.cardItemContainer}>
+    <Pressable
+      style={styles.cardItemContainer}
+      onPress={() => props.navigate("ItemSelected")}
+    >
       <Image source={props.image} style={styles.imageCard} />
       <View>
         <Text
@@ -56,7 +59,7 @@ const CardItem = (props) => {
           </View>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
