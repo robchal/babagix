@@ -6,7 +6,6 @@ import { colors, freeAroundYou } from "../global";
 import * as Location from "expo-location";
 
 const { width, height } = Dimensions.get("window");
-
 const MapScreen = () => {
   const [position, setPosition] = React.useState({
     latitudeDelta: 0.008,

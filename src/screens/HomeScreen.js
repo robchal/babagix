@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet, Pressable, FlatList } from "react-native";
 import * as React from "react";
 import { Icon } from "react-native-elements";
-import { shuffleArray } from "../helpers/shuffledArray";
 import { CardItem, HomeScreenNavigationHeader } from "../components";
 import { colors, gap, itemDatas } from "../global";
+import { shuffleArray } from "../helpers";
 
 const HomeScreen = ({ navigation }) => {
   const shuffleData = shuffleArray(itemDatas);
@@ -57,13 +57,8 @@ const HomeScreen = ({ navigation }) => {
             renderItem={(items, index) => {
               return (
                 <CardItem
-                  image={items.item.image}
-                  itemName={items.item.itemName}
-                  username={items.item.username}
-                  userAva={items.item.userAva}
-                  location={items.item.location}
-                  loved={items.item.loved}
-                  navigate={(data) => navigation.navigate(data)}
+                  data={items}
+                  navigate={(screen, data) => navigation.navigate(screen, data)}
                 />
               );
             }}

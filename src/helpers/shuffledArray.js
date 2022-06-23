@@ -1,4 +1,4 @@
-export function shuffleArray(arr) {
+function shuffleArray(arr) {
   let arrLength = arr.length;
   let shuffledArr;
   let randomizeIndex;
@@ -10,3 +10,5 @@ export function shuffleArray(arr) {
   }
   return arr;
 }
+
+export default shuffleArray;

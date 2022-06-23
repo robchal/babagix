@@ -6,7 +6,6 @@ import { colors } from "../global";
 
 const { width, height } = Dimensions.get("window");
 const MapViews = (props) => {
-  console.log(props);
   return (
     <View style={styles.container}>
       <MapView
@@ -16,19 +15,13 @@ const MapViews = (props) => {
         style={styles.map}
         initialRegion={props.region}
       >
-        {props.aroundYou &&
-          props.aroundYou.map((item, index) => {
-            return (
-              <MapView.Marker coordinate={item} key={index.toString()}>
-                <Icon
-                  type="material-community"
-                  name="food-outline"
-                  size={25}
-                  color={colors.primaryText}
-                />
-              </MapView.Marker>
-            );
-          })}
+        {props.region && (
+          <MapView.Marker coordinate={props.region}>
+            <View style={styles.markerContainer}>
+              <View style={styles.circleMarker}></View>
+            </View>
+          </MapView.Marker>
+        )}
       </MapView>
     </View>
   );
@@ -48,5 +41,21 @@ const styles = StyleSheet.create({
   map: {
     width: width * 0.92,
     height: height * 0.4,
+  },
+  markerContainer: {
+    borderRadius: 100,
+    position: "relative",
+    borderWidth: 2,
+    borderColor: colors.secondaryText2,
+    width: 35,
+    height: 35,
+    padding: 1,
+    opacity: 0.8,
+  },
+  circleMarker: {
+    backgroundColor: colors.secondaryText,
+    flex: 1,
+    borderRadius: 100,
+    opacity: 0.3,
   },
 });

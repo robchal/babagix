@@ -12,9 +12,10 @@ import ImageSlider from "../components/ImageSlider";
 import { Icon } from "react-native-elements";
 import { colors, gap, shadow } from "../global";
 import { MapViews } from "../components";
+import { relativeTime } from "../helpers";
 
 const { width, height } = Dimensions.get("window");
-const ItemSelected = ({ navigation }) => {
+const ItemSelected = ({ navigation, route }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -22,11 +23,24 @@ const ItemSelected = ({ navigation }) => {
           <Icon type="material-community" name={"arrow-left"} size={25} />
         </Pressable>
         <Text numberOfLines={1} style={styles.headerText}>
-          Sneaker for men with full color and size free to take
+          {route.params.data.itemName}
         </Text>
       </View>
       <ScrollView>
-        <ImageSlider />
+        <ImageSlider images={route.params.data.images} />
+        <View style={styles.iconsContainer}>
+          <View style={styles.iconContainer}>
+            <Pressable>
+              <Icon
+                type="material-community"
+                name={"cards-heart-outline"}
+                size={22}
+                color="#6F7B74"
+              />
+            </Pressable>
+            <Text style={styles.likedText}>120 likes</Text>
+          </View>
+        </View>
         <View style={styles.detailItem}>
           <View style={styles.userImageContainer}>
             <Image
@@ -36,10 +50,7 @@ const ItemSelected = ({ navigation }) => {
           </View>
           <View style={styles.details}>
             <Text style={styles.username}>Jessica Jane</Text>
-            <Text style={styles.itemName}>
-              Sneaker for men with full color and size free to take right now
-              just chat me
-            </Text>
+            <Text style={styles.itemName}>{route.params.data.itemName}</Text>
             <View style={styles.timeAddedContainer}>
               <Icon
                 type="material-community"
@@ -48,7 +59,7 @@ const ItemSelected = ({ navigation }) => {
                 color={colors.alernative}
               />
               <Text style={styles.timeDetail}>
-                ditambahkan 3 hari yang lalu
+                ditambahkan {relativeTime(route.params.data.createdAt)}
               </Text>
             </View>
           </View>
@@ -62,21 +73,11 @@ const ItemSelected = ({ navigation }) => {
           </Text>
         </View>
         <View style={styles.mapView}>
-          <Text
-            style={{
-              fontSize: 13,
-              fontWeight: "500",
-              color: colors.secondaryText2,
-              paddingTop: 16,
-              paddingBottom: 3,
-            }}
-          >
-            Perkiraan Lokasi
-          </Text>
+          <Text style={styles.mapHeaderText}>Perkiraan Lokasi</Text>
           <MapViews
             region={{
-              longitude: 105.828171,
-              latitude: -6.372625,
+              longitude: route.params.data.location.longitude,
+              latitude: route.params.data.location.latitude,
               latitudeDelta: 0.008,
               longitudeDelta: 0.008,
             }}
@@ -84,27 +85,8 @@ const ItemSelected = ({ navigation }) => {
         </View>
       </ScrollView>
       <Pressable>
-        <View
-          style={{
-            position: "absolute",
-            bottom: 20,
-            right: 20,
-            backgroundColor: colors.secondaryText2,
-            width: width * 0.9,
-            paddingVertical: 13,
-            borderRadius: 10,
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 15,
-              fontWeight: "500",
-              color: "#fff",
-              textAlign: "center",
-            }}
-          >
-            Kirim pesan permintaan
-          </Text>
+        <View style={styles.chatButtonContainer}>
+          <Text style={styles.chatButtonText}>Kirim pesan permintaan</Text>
         </View>
       </Pressable>
     </View>
@@ -116,7 +98,7 @@ export default ItemSelected;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: gap.statusBarHeight,
+    paddingTop: gap.statusBarHeight + 5,
     backgroundColor: "#fff",
   },
   header: {
@@ -175,5 +157,43 @@ const styles = StyleSheet.create({
   mapView: {
     flex: 1,
     paddingHorizontal: 15,
+  },
+  iconsContainer: {
+    flexDirection: "row",
+    paddingHorizontal: 15,
+    backgroundColor: "#E9E9E9",
+    paddingVertical: 8,
+  },
+  iconContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginRight: 13,
+  },
+  likedText: {
+    marginLeft: 2,
+    fontSize: 13,
+    color: "#6F7B74",
+  },
+  mapHeaderText: {
+    fontSize: 13,
+    fontWeight: "500",
+    color: colors.secondaryText2,
+    paddingTop: 16,
+    paddingBottom: 3,
+  },
+  chatButtonContainer: {
+    position: "absolute",
+    bottom: 20,
+    right: 20,
+    backgroundColor: colors.secondaryText2,
+    width: width * 0.9,
+    paddingVertical: 13,
+    borderRadius: 10,
+  },
+  chatButtonText: {
+    fontSize: 15,
+    fontWeight: "500",
+    color: "#fff",
+    textAlign: "center",
   },
 });

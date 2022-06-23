@@ -7,19 +7,19 @@ const CardItem = (props) => {
   return (
     <Pressable
       style={styles.cardItemContainer}
-      onPress={() => props.navigate("ItemSelected")}
+      onPress={() => props.navigate("ItemSelected", { data: props.data.item })}
     >
-      <Image source={props.image} style={styles.imageCard} />
+      <Image source={props.data.item.images[0]} style={styles.imageCard} />
       <View>
         <Text
           style={{ fontSize: 14, fontWeight: "500", color: colors.primaryText }}
         >
-          {props.itemName}
+          {props.data.item.itemName}
         </Text>
         <View style={styles.userCardDetail}>
-          <Image source={props.userAva} style={styles.avaImageCard} />
+          <Image source={props.data.item.userAva} style={styles.avaImageCard} />
           <Text style={{ fontSize: 12, color: colors.secondaryText }}>
-            {props.username}
+            {props.data.item.username}
           </Text>
         </View>
         <View style={styles.cardDetailItemContainer}>
@@ -37,7 +37,7 @@ const CardItem = (props) => {
                 marginLeft: 2,
               }}
             >
-              {props.location}
+              {/* {props.data.item.location} */}
             </Text>
           </View>
           <View style={styles.cardDetailItem}>
@@ -54,7 +54,7 @@ const CardItem = (props) => {
                 marginLeft: 2,
               }}
             >
-              {props.loved}
+              {props.data.item.loved}
             </Text>
           </View>
         </View>
