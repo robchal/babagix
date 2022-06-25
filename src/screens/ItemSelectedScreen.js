@@ -15,7 +15,7 @@ import { MapViews } from "../components";
 import { relativeTime } from "../helpers";
 
 const { width, height } = Dimensions.get("window");
-const ItemSelected = ({ navigation, route }) => {
+const ItemSelectedScreen = ({ navigation, route }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -65,12 +65,7 @@ const ItemSelected = ({ navigation, route }) => {
           </View>
         </View>
         <View style={styles.itemDescription}>
-          <Text>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-            delectus quia nemo deleniti ab facilis neque quas molestias? Ipsam
-            voluptatem quo rerum illo, facere ut eveniet perferendis possimus
-            dolore magni.
-          </Text>
+          <Text>{route.params.data.description}</Text>
         </View>
         <View style={styles.mapView}>
           <Text style={styles.mapHeaderText}>Perkiraan Lokasi</Text>
@@ -93,7 +88,7 @@ const ItemSelected = ({ navigation, route }) => {
   );
 };
 
-export default ItemSelected;
+export default ItemSelectedScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -175,7 +170,7 @@ const styles = StyleSheet.create({
     color: "#6F7B74",
   },
   mapHeaderText: {
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: "500",
     color: colors.secondaryText2,
     paddingTop: 16,

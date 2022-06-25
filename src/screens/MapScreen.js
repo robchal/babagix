@@ -1,17 +1,18 @@
 import * as React from "react";
 import MapView from "react-native-maps";
-import { StyleSheet, View, Dimensions, Button } from "react-native";
+import { StyleSheet, View, Dimensions, Button, Pressable } from "react-native";
 import { Icon } from "react-native-elements";
 import { colors, freeAroundYou } from "../global";
 import * as Location from "expo-location";
+import { color } from "react-native-elements/dist/helpers";
 
 const { width, height } = Dimensions.get("window");
 const MapScreen = () => {
   const [position, setPosition] = React.useState({
-    latitudeDelta: 0.008,
-    longitudeDelta: 0.008,
-    latitude: parseFloat(-6.110366),
-    longitude: parseFloat(106.163979),
+    latitudeDelta: 20,
+    longitudeDelta: 20,
+    latitude: parseFloat(-0.789275),
+    longitude: parseFloat(113.921326),
   });
   const _map = React.useRef();
   //user location useeffect
@@ -96,32 +97,54 @@ const MapScreen = () => {
 
   //animate to user location
   const goToMyLocation = async () => {
-    _map.current.animateToRegion(position, 2000);
+    _map.current.animateToRegion(position, 1000);
   };
 
   return (
     <View style={styles.container}>
-      <MapView
-        ref={_map}
-        showsUserLocation={true}
-        followsUserLocation={true}
-        style={styles.map}
-        initialRegion={position}
-      >
-        {freeAroundYou &&
-          freeAroundYou.map((item, index) => {
-            return (
-              <MapView.Marker coordinate={item} key={index.toString()}>
-                <Icon
-                  type="material-community"
-                  name="food-outline"
-                  size={25}
-                  color={colors.primaryText}
-                />
-              </MapView.Marker>
-            );
-          })}
-      </MapView>
+      {position && (
+        <View style={{ position: "relative", flex: 1 }}>
+          <Pressable
+            style={{
+              position: "absolute",
+              top: 100,
+              right: 8,
+              backgroundColor: "#fff",
+              borderRadius: 100,
+              padding: 10,
+            }}
+            onPress={goToMyLocation}
+          >
+            <Icon
+              type="material-community"
+              name="home-outline"
+              color={colors.primaryLogo}
+              size={30}
+            />
+          </Pressable>
+          <MapView
+            ref={_map}
+            showsUserLocation={true}
+            followsUserLocation={true}
+            style={styles.map}
+            initialRegion={position}
+          >
+            {freeAroundYou &&
+              freeAroundYou.map((item, index) => {
+                return (
+                  <MapView.Marker coordinate={item} key={index.toString()}>
+                    <Icon
+                      type="material-community"
+                      name="food-outline"
+                      size={25}
+                      color={colors.primaryText}
+                    />
+                  </MapView.Marker>
+                );
+              })}
+          </MapView>
+        </View>
+      )}
     </View>
   );
 };
@@ -137,5 +160,6 @@ const styles = StyleSheet.create({
   map: {
     width,
     height: height,
+    zIndex: -100,
   },
 });

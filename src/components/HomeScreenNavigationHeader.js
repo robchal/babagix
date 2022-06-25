@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { Icon } from "react-native-elements";
 import { colors } from "../global";
-import { filterData } from "../helpers/filterData";
+import { filterData } from "../helpers";
 
 const HomeScreenNavigationHeader = (props) => {
   const initialStateCategory = {

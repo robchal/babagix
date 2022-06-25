@@ -1,10 +1,9 @@
-import { View, Text } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "react-native-elements";
 import HomeScreen from "../screens/HomeScreen";
 import { colors } from "../global/styles";
-import CardItem from "../components/CardItem";
 import MapScreen from "../screens/MapScreen";
+import Profile from "../screens/Profile";
 
 const Tab = createBottomTabNavigator();
 
@@ -14,11 +13,12 @@ const TabNavigation = () => {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-
           if (route.name === "Home") {
             iconName = focused ? "home" : "home-outline";
           } else if (route.name === "Map") {
             iconName = focused ? "map-marker" : "map-marker-outline";
+          } else if (route.name === "Profile") {
+            iconName = focused ? "account" : "account-outline";
           }
 
           // You can return any component that you like here!
@@ -38,6 +38,7 @@ const TabNavigation = () => {
     >
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Map" component={MapScreen} />
+      <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
 };

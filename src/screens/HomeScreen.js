@@ -18,7 +18,10 @@ const HomeScreen = ({ navigation }) => {
           <Text style={styles.hSLogoText}>BABAGIX</Text>
         </View>
         <View style={styles.hSHeaderIconCont}>
-          <Pressable style={{ marginRight: 10 }}>
+          <Pressable
+            style={{ marginRight: 10 }}
+            onPress={() => navigation.navigate("SearchScreen")}
+          >
             <Icon type="material-community" name="magnify" size={25} />
           </Pressable>
           <Pressable>

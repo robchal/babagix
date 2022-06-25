@@ -7,7 +7,9 @@ const CardItem = (props) => {
   return (
     <Pressable
       style={styles.cardItemContainer}
-      onPress={() => props.navigate("ItemSelected", { data: props.data.item })}
+      onPress={() =>
+        props.navigate("ItemSelectedScreen", { data: props.data.item })
+      }
     >
       <Image source={props.data.item.images[0]} style={styles.imageCard} />
       <View>

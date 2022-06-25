@@ -3,7 +3,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import TabNavigation from "./TabNavigation";
-import ItemSelected from "../screens/ItemSelected";
+import ItemSelectedScreen from "../screens/ItemSelectedScreen";
+import SearchScreen from "../screens/SearchScreen";
 
 const Stack = createNativeStackNavigator();
 const Navigation = (props) => {
@@ -15,8 +16,12 @@ const Navigation = (props) => {
           component={TabNavigation}
         ></Stack.Screen>
         <Stack.Screen
-          name="ItemSelected"
-          component={ItemSelected}
+          name="ItemSelectedScreen"
+          component={ItemSelectedScreen}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="SearchScreen"
+          component={SearchScreen}
         ></Stack.Screen>
       </Stack.Navigator>
       <StatusBar style="auto" />
