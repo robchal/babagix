@@ -1,41 +1,23 @@
 import { View, Text, StyleSheet, Pressable, FlatList } from "react-native";
 import * as React from "react";
 import { Icon } from "react-native-elements";
-import { CardItem, HomeScreenNavigationHeader } from "../components";
+import { CardItem, Header, HomeScreenNavigationHeader } from "../components";
 import { colors, gap, itemDatas } from "../global";
 import { shuffleArray } from "../helpers";
 
 const HomeScreen = ({ navigation }) => {
   const shuffleData = shuffleArray(itemDatas);
   const [dataRendered, setDataRendered] = React.useState(shuffleData);
-  const [resetActiveCategory, setResetActiveCategory] = React.useState(false);
 
   return (
     <View style={styles.homeScreenContainer}>
       {/* screen header */}
-      <View style={styles.hSHeaderContainer}>
-        <View style={styles.hSLogo}>
-          <Text style={styles.hSLogoText}>BABAGIX</Text>
-        </View>
-        <View style={styles.hSHeaderIconCont}>
-          <Pressable
-            style={{ marginRight: 10 }}
-            onPress={() => navigation.navigate("SearchScreen")}
-          >
-            <Icon type="material-community" name="magnify" size={25} />
-          </Pressable>
-          <Pressable>
-            <Icon type="material-community" name="menu" size={25} />
-          </Pressable>
-        </View>
-      </View>
-
+      <Header navigation={(screen) => navigation.navigate(screen)} />
       {/* navigation header */}
 
       <HomeScreenNavigationHeader
         dataSend={shuffleData}
         dataShown={(data) => setDataRendered(data)}
-        resetActiveCategory={(data) => setResetActiveCategory(data)}
       />
 
       {/* card item list */}
@@ -89,27 +71,6 @@ const styles = StyleSheet.create({
     paddingTop: gap.statusBarHeight + 10,
     paddingHorizontal: 20,
   },
-  hSHeaderContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  hSLogo: {
-    paddingVertical: 5,
-    paddingHorizontal: 12,
-    backgroundColor: colors.primaryLogo,
-    borderRadius: 5,
-  },
-  hSLogoText: {
-    color: "#fff",
-    fontWeight: "500",
-    textAlign: "center",
-  },
-  hSHeaderIconCont: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-
   hSCardContainer: {
     paddingTop: 10,
     flex: 5,

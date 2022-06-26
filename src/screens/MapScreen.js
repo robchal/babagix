@@ -1,19 +1,27 @@
 import * as React from "react";
-import MapView from "react-native-maps";
-import { StyleSheet, View, Dimensions, Button, Pressable } from "react-native";
+import MapView, { Callout, Marker } from "react-native-maps";
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  Pressable,
+  Text,
+  Image,
+} from "react-native";
 import { Icon } from "react-native-elements";
-import { colors, freeAroundYou } from "../global";
+import { colors, gap, itemDatas } from "../global";
 import * as Location from "expo-location";
-import { color } from "react-native-elements/dist/helpers";
+import { Header, HomeScreenNavigationHeader } from "../components";
 
 const { width, height } = Dimensions.get("window");
-const MapScreen = () => {
+const MapScreen = ({ navigation }) => {
   const [position, setPosition] = React.useState({
     latitudeDelta: 20,
     longitudeDelta: 20,
     latitude: parseFloat(-0.789275),
     longitude: parseFloat(113.921326),
   });
+  const [dataRendered, setDataRendered] = React.useState(itemDatas);
   const _map = React.useRef();
   //user location useeffect
   // React.useEffect(() => {
@@ -102,26 +110,15 @@ const MapScreen = () => {
 
   return (
     <View style={styles.container}>
+      <View style={{ paddingHorizontal: 15, marginBottom: 10 }}>
+        <Header navigation={(screen) => navigation.navigate(screen)} />
+        <HomeScreenNavigationHeader
+          dataSend={itemDatas}
+          dataShown={(data) => setDataRendered(data)}
+        />
+      </View>
       {position && (
-        <View style={{ position: "relative", flex: 1 }}>
-          <Pressable
-            style={{
-              position: "absolute",
-              top: 100,
-              right: 8,
-              backgroundColor: "#fff",
-              borderRadius: 100,
-              padding: 10,
-            }}
-            onPress={goToMyLocation}
-          >
-            <Icon
-              type="material-community"
-              name="home-outline"
-              color={colors.primaryLogo}
-              size={30}
-            />
-          </Pressable>
+        <View style={{ flex: 1 }}>
           <MapView
             ref={_map}
             showsUserLocation={true}
@@ -129,16 +126,64 @@ const MapScreen = () => {
             style={styles.map}
             initialRegion={position}
           >
-            {freeAroundYou &&
-              freeAroundYou.map((item, index) => {
+            <Marker
+              draggable
+              coordinate={position}
+              onDragEnd={(e) => {
+                const { longitude, latitude } = e.nativeEvent.coordinate;
+                setPosition({ ...position, longitude, latitude });
+              }}
+            />
+            {dataRendered &&
+              dataRendered.map((item, index) => {
                 return (
-                  <MapView.Marker coordinate={item} key={index.toString()}>
-                    <Icon
-                      type="material-community"
-                      name="food-outline"
-                      size={25}
-                      color={colors.primaryText}
-                    />
+                  <MapView.Marker
+                    coordinate={item.location}
+                    key={index.toString()}
+                  >
+                    {item.category_id == 1 && (
+                      <Icon
+                        type="material-community"
+                        name="food"
+                        size={25}
+                        color={colors.activeCategory}
+                      />
+                    )}
+                    {item.category_id == 2 && (
+                      <Icon
+                        type="material-community"
+                        name="lightbulb"
+                        size={25}
+                        color={colors.activeCategory}
+                      />
+                    )}
+                    <Callout
+                      tooltip
+                      onPress={() =>
+                        navigation.navigate("ItemSelectedScreen", {
+                          data: item,
+                        })
+                      }
+                    >
+                      <View>
+                        <View style={styles.bubbleContainer}>
+                          <Text style={{ fontSize: 13, fontWeight: "500" }}>
+                            {item.itemName}
+                          </Text>
+                          <Text style={{ fontSize: 11, color: colors.line }}>
+                            {item.username}
+                          </Text>
+                          <Text>
+                            <Image
+                              source={item.images[0]}
+                              style={styles.imageBubble}
+                            />
+                          </Text>
+                        </View>
+                        <View style={styles.arrowBorder}></View>
+                        <View style={styles.arrow}></View>
+                      </View>
+                    </Callout>
                   </MapView.Marker>
                 );
               })}
@@ -155,11 +200,40 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingTop: 30,
+    paddingTop: gap.statusBarHeight,
   },
   map: {
     width,
     height: height,
-    zIndex: -100,
+  },
+  bubbleContainer: {
+    flexDirection: "column",
+    backgroundColor: "#fff",
+    borderRadius: 6,
+    borderColor: "#ccc",
+    borderWidth: 0.5,
+    padding: 10,
+    width: 150,
+  },
+  imageBubble: {
+    width: 120,
+    height: 80,
+    resizeMode: "contain",
+  },
+  arrowBorder: {
+    backgroundColor: "transparent",
+    borderColor: "transparent",
+    borderTopColor: "#007a87",
+    borderWidth: 16,
+    alignSelf: "center",
+    marginTop: -0.5,
+  },
+  arrow: {
+    backgroundColor: "transparent",
+    borderColor: "transparent",
+    borderTopColor: "#fff",
+    borderWidth: 16,
+    alignSelf: "center",
+    marginTop: -32,
   },
 });

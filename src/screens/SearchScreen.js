@@ -50,6 +50,7 @@ const SearchScreen = ({ navigation }) => {
           value={searchInput}
           onChangeText={textInput}
           onSubmitEditing={() => searchThis()}
+          autoFocus
         />
         <Pressable onPress={clearInput}>
           <Icon

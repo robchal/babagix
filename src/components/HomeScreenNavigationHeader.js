@@ -24,7 +24,6 @@ const HomeScreenNavigationHeader = (props) => {
       style3: colors.secondaryText2,
     });
     props.dataShown(filterData(props.dataSend, 1));
-    props.resetActiveCategory(true);
   }
 
   function nonMakananCategoryHandler() {
@@ -34,7 +33,6 @@ const HomeScreenNavigationHeader = (props) => {
       style3: colors.secondaryText2,
     });
     props.dataShown(filterData(props.dataSend, 2));
-    props.resetActiveCategory(true);
   }
 
   function filterCategoryHandler() {
@@ -51,7 +49,6 @@ const HomeScreenNavigationHeader = (props) => {
       "notActiveNavigationHeader",
     ]);
     props.dataShown([...props.dataSend]);
-    props.resetActiveCategory(false);
     setActiveCategory(initialStateCategory);
   }
 
@@ -61,7 +58,6 @@ const HomeScreenNavigationHeader = (props) => {
       "activeNavigationHeader",
     ]);
     props.dataShown([...props.dataSend]);
-    props.resetActiveCategory(false);
     setActiveCategory(initialStateCategory);
   }
 
