@@ -146,6 +146,17 @@ export const itemDatas = [
     loved: 78,
     createdAt: Number(new Date()),
   },
+  {
+    id: Math.random().toString(),
+    category_id: 2,
+    images: [require("../../assets/nonmakanan/shoe3.webp")],
+    itemName: "Sneaker basketBall Series 1",
+    userAva: require("../../assets/ava4.png"),
+    username: "Michael Jordan",
+    location: { longitude: 105.900416, latitude: -6.309529 },
+    loved: 78,
+    createdAt: Number(new Date()),
+  },
 ];
 
 export const freeAroundYou = [
