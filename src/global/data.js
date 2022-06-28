@@ -167,3 +167,45 @@ export const freeAroundYou = [
   { longitude: 105.831649, latitude: -6.372903 },
   { longitude: 105.829651, latitude: -6.372071 },
 ];
+
+export const chat = [
+  { userId: 1, text: "Hey there", createdAt: Number(new Date()) },
+  { userId: 2, text: "Hello too", createdAt: Number(new Date()) },
+  {
+    userId: 2,
+    text: "can i ask the item that you post ?",
+    createdAt: Number(new Date()),
+  },
+  { userId: 1, text: "Sure you can have it", createdAt: Number(new Date()) },
+  { userId: 1, text: "Where do you live ?", createdAt: Number(new Date()) },
+  {
+    userId: 1,
+    text: "You can go to my location if you want, you can come if you want ill welcome you here in my house. its not that far from you",
+    createdAt: Number(new Date()),
+  },
+  {
+    userId: 2,
+    text: "Sure ill be there in no time",
+    createdAt: Number(new Date()),
+  },
+  {
+    userId: 1,
+    text: "You can go to my location if you want, you can come if you want ill welcome you here in my house. its not that far from you",
+    createdAt: Number(new Date()),
+  },
+  {
+    userId: 2,
+    text: "Sure ill be there in no time",
+    createdAt: Number(new Date()),
+  },
+  {
+    userId: 1,
+    text: "You can go to my location if you want, you can come if you want ill welcome you here in my house. its not that far from you",
+    createdAt: Number(new Date()),
+  },
+  {
+    userId: 2,
+    text: "Sure ill be there in no time",
+    createdAt: Number(new Date()),
+  },
+];

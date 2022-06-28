@@ -79,7 +79,7 @@ const ItemSelectedScreen = ({ navigation, route }) => {
           />
         </View>
       </ScrollView>
-      <Pressable>
+      <Pressable onPress={() => navigation.navigate("ChatScreen")}>
         <View style={styles.chatButtonContainer}>
           <Text style={styles.chatButtonText}>Kirim pesan permintaan</Text>
         </View>

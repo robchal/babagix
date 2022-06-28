@@ -5,6 +5,7 @@ import {
   Pressable,
   FlatList,
   Dimensions,
+  TextInput,
 } from "react-native";
 import React, { useState } from "react";
 import { colors, gap, itemDatas, shadow } from "../global";
@@ -15,7 +16,16 @@ const numColumns = 3;
 const { width, height } = Dimensions.get("window");
 const Profile = ({ navigation }) => {
   console.log();
+  const [activeProfileScreen, setActiveProfileScreen] = useState([true, false]);
   const [dataRendered, setDataRendered] = useState(itemDatas);
+
+  function showUserPosts() {
+    setActiveProfileScreen([true, false]);
+  }
+
+  function showUserSettings() {
+    setActiveProfileScreen([false, true]);
+  }
   return (
     <View style={styles.container}>
       {/* navigation back */}
@@ -34,26 +44,59 @@ const Profile = ({ navigation }) => {
                 style={styles.imageProfile}
               />
             </View>
+            <Text style={styles.username}>Jhon Doe</Text>
           </View>
           <View style={styles.profileActionContainer}>
-            <Pressable style={styles.profileAction}>
-              <Text style={styles.profileActionText}>Shared</Text>
+            <Pressable
+              style={styles.profileAction}
+              onPress={() => showUserPosts()}
+            >
+              <Text
+                style={
+                  activeProfileScreen[0]
+                    ? styles.profileActionText
+                    : styles.profileActionText2
+                }
+              >
+                Shared
+              </Text>
               <Icon
                 type="material-community"
                 name="archive-outline"
                 size={25}
+                color={
+                  activeProfileScreen[0] ? colors.primaryText : colors.line
+                }
               />
             </Pressable>
-            <Pressable style={styles.profileAction}>
-              <Text style={styles.profileActionText}>Edit Profile</Text>
-              <Icon type="material-community" name="cog-outline" size={25} />
+            <Pressable
+              style={styles.profileAction}
+              onPress={() => showUserSettings()}
+            >
+              <Text
+                style={
+                  activeProfileScreen[1]
+                    ? styles.profileActionText
+                    : styles.profileActionText2
+                }
+              >
+                Edit Profile
+              </Text>
+              <Icon
+                type="material-community"
+                name="cog-outline"
+                size={25}
+                color={
+                  activeProfileScreen[1] ? colors.primaryText : colors.line
+                }
+              />
             </Pressable>
           </View>
         </View>
       </View>
       {/* profile content */}
       <View style={styles.contentContainer}>
-        {dataRendered && (
+        {dataRendered && activeProfileScreen[0] && (
           <View style={{ flex: 1, width }}>
             <FlatList
               data={dataRendered}
@@ -69,9 +112,13 @@ const Profile = ({ navigation }) => {
                   : gridStyle && dataRendered.length - index == 2
                   ? styles.secondGridImage
                   : styles.thirdGridImage;
-                console.log(useStyle);
                 return (
-                  <Pressable style={{ ...useStyle, ...shadow }}>
+                  <Pressable
+                    style={{ ...useStyle, ...shadow }}
+                    onPress={() =>
+                      navigation.navigate("ItemSelectedScreen", { data: item })
+                    }
+                  >
                     <Image
                       source={item.images[0]}
                       style={{
@@ -88,6 +135,13 @@ const Profile = ({ navigation }) => {
               }}
               style={{ paddingBottom: 300, flex: 1 }}
             />
+          </View>
+        )}
+        {activeProfileScreen[1] && (
+          <View style={styles.settingScontainer}>
+            <View>
+              <TextInput value="Jhon Doe" style={styles.editInput} />
+            </View>
           </View>
         )}
       </View>
@@ -131,6 +185,12 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     ...shadow,
   },
+  username: {
+    fontSize: 16,
+    fontWeight: "500",
+    color: colors.secondaryText2,
+    marginTop: 15,
+  },
   profileActionContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
@@ -144,6 +204,13 @@ const styles = StyleSheet.create({
   },
   profileActionText: {
     marginRight: 10,
+    color: colors.primaryText,
+    fontWeight: "500",
+  },
+  profileActionText2: {
+    marginRight: 10,
+    color: colors.line,
+    fontWeight: "500",
   },
   contentContainer: {
     paddingTop: 5,
@@ -163,5 +230,15 @@ const styles = StyleSheet.create({
     width: width / 3 - 4,
     height: 130,
     margin: 2,
+  },
+  settingScontainer: {
+    paddingHorizontal: 15,
+    marginVertical: 20,
+  },
+  editInput: {
+    paddingVertical: 3,
+    borderBottomWidth: 0.55,
+    borderBottomColor: colors.line,
+    color: colors.secondaryText,
   },
 });

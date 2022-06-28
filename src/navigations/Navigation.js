@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TabNavigation from "./TabNavigation";
 import ItemSelectedScreen from "../screens/ItemSelectedScreen";
 import SearchScreen from "../screens/SearchScreen";
+import ChatScreen from "../screens/ChatScreen";
 
 const Stack = createNativeStackNavigator();
 const Navigation = (props) => {
@@ -23,6 +24,7 @@ const Navigation = (props) => {
           name="SearchScreen"
           component={SearchScreen}
         ></Stack.Screen>
+        <Stack.Screen name="ChatScreen" component={ChatScreen}></Stack.Screen>
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
