@@ -4,7 +4,7 @@ import HomeScreen from "../screens/HomeScreen";
 import { colors } from "../global/styles";
 import MapScreen from "../screens/MapScreen";
 import Profile from "../screens/Profile";
-import ChatScreen from "../screens/ChatScreen";
+import MessagesScreen from "../screens/MessagesScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -20,7 +20,7 @@ const TabNavigation = () => {
             iconName = focused ? "map-marker" : "map-marker-outline";
           } else if (route.name === "Profile") {
             iconName = focused ? "account" : "account-outline";
-          } else if (route.name === "Chat") {
+          } else if (route.name === "Messages") {
             iconName = focused ? "email" : "email-outline";
           }
 
@@ -41,7 +41,7 @@ const TabNavigation = () => {
     >
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Map" component={MapScreen} />
-      <Tab.Screen name="Chat" component={ChatScreen} />
+      <Tab.Screen name="Messages" component={MessagesScreen} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );

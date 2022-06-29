@@ -209,3 +209,83 @@ export const chat = [
     createdAt: Number(new Date()),
   },
 ];
+
+export const chatList = [
+  {
+    userId: Math.random().toString(),
+    username: "Robert Lewandoswki",
+    avatar: require("../../assets/ava.png"),
+    text: "can i have you shoes it look awesome, please give it to me!",
+    createdAt: Number(new Date()) - 10000,
+  },
+  {
+    userId: Math.random().toString(),
+    username: "Jumaelah Istanbul",
+    avatar: require("../../assets/ava1.png"),
+    text: "Is that still new ?",
+    createdAt: Number(new Date()) - 100000,
+  },
+  {
+    userId: Math.random().toString(),
+    username: "Vicky Prasetyo",
+    avatar: require("../../assets/ava2.png"),
+    text: "Maybe we can meet somewhere at your place?",
+    createdAt: Number(new Date()) - 500000,
+  },
+  {
+    userId: Math.random().toString(),
+    username: "Dobersop Prons",
+    avatar: require("../../assets/ava3.png"),
+    text: "Still availabel ? ?",
+    createdAt: Number(new Date()) - 5100000,
+  },
+  {
+    userId: Math.random().toString(),
+    username: "Random dude yo",
+    avatar: require("../../assets/ava4.png"),
+    text: "Just wanna say hai bro",
+    createdAt: Number(new Date()) - 5070000,
+  },
+  {
+    userId: Math.random().toString(),
+    username: "Avatar aang",
+    avatar: require("../../assets/ava2.png"),
+    text: "Im the legend of avatar",
+    createdAt: Number(new Date()) - 50170000,
+  },
+  {
+    userId: Math.random().toString(),
+    username: "Mister Invincibe",
+    avatar: require("../../assets/ava1.png"),
+    text: "Its okay if you dont want to give it to me",
+    createdAt: Number(new Date()) - 3070000,
+  },
+  {
+    userId: Math.random().toString(),
+    username: "Dobersop Prons",
+    avatar: require("../../assets/ava3.png"),
+    text: "Still availabel ? ?",
+    createdAt: Number(new Date()) - 5100000,
+  },
+  {
+    userId: Math.random().toString(),
+    username: "Random dude yo",
+    avatar: require("../../assets/ava4.png"),
+    text: "Just wanna say hai bro",
+    createdAt: Number(new Date()) - 5070000,
+  },
+  {
+    userId: Math.random().toString(),
+    username: "Avatar aang",
+    avatar: require("../../assets/ava2.png"),
+    text: "Im the legend of avatar",
+    createdAt: Number(new Date()) - 50170000,
+  },
+  {
+    userId: Math.random().toString(),
+    username: "Mister Invincibe",
+    avatar: require("../../assets/ava1.png"),
+    text: "Its okay if you dont want to give it to me",
+    createdAt: Number(new Date()) - 3070000,
+  },
+];

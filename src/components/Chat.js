@@ -1,13 +1,18 @@
 import { View, Text, StyleSheet, Dimensions } from "react-native";
 import React from "react";
 import { colors } from "../global";
+import { relativeTime } from "../helpers";
 
 const { width, height } = Dimensions.get("window");
+
 const Chat = (props) => {
   return (
     <View style={props.owner ? styles.owner : styles.guest}>
       <Text style={props.owner ? styles.ownerText : styles.guestText}>
         {props.data.text}
+      </Text>
+      <Text style={props.owner ? styles.ownerTime : styles.guestTime}>
+        {relativeTime(props.data.createdAt)}
       </Text>
     </View>
   );
@@ -41,5 +46,17 @@ const styles = StyleSheet.create({
   },
   guestText: {
     color: colors.secondaryText,
+  },
+  ownerTime: {
+    color: colors.line,
+    fontSize: 9,
+    paddingTop: 5,
+    alignSelf: "flex-end",
+  },
+  guestTime: {
+    color: "#AEAEAE",
+    fontSize: 9,
+    paddingTop: 5,
+    alignSelf: "flex-start",
   },
 });

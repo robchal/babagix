@@ -64,7 +64,17 @@ const ChatScreen = ({ navigation }) => {
                   marginVertical: 5,
                 }}
               >
-                Anytime
+                Bisa diambil :
+              </Text>
+              <Text
+                style={{
+                  fontSize: 11,
+                  color: colors.primaryLogo,
+                  marginLeft: 5,
+                  marginVertical: 5,
+                }}
+              >
+                Kapan saja
               </Text>
             </View>
           </View>
