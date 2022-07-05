@@ -27,7 +27,12 @@ const MessagesScreen = ({ navigation }) => {
         <FlatList
           data={message}
           renderItem={({ item, index }) => {
-            return <ChatList data={item} />;
+            return (
+              <ChatList
+                data={item}
+                navigation={(screen, data) => navigation.navigate(screen, data)}
+              />
+            );
           }}
           keyExtractor={(item, index) => {
             return item.userId;

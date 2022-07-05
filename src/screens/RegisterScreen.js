@@ -9,7 +9,6 @@ import React, { useState } from "react";
 import { colors, gap } from "../global";
 import Input from "../components/Input";
 import { Icon } from "react-native-elements";
-import Navigation from "../navigations/Navigation";
 
 const RegisterScreen = ({ navigation }) => {
   const [username, setUsername] = useState("");

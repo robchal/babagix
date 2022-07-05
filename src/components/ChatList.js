@@ -13,7 +13,9 @@ import { relativeTime } from "../helpers";
 const { width, height } = Dimensions.get("window");
 const ChatList = (props) => {
   return (
-    <Pressable>
+    <Pressable
+      onPress={() => props.navigation("ChatScreen", { data: props.data })}
+    >
       <View style={styles.container}>
         <Image source={props.data.avatar} style={styles.avaImage} />
         <View style={{ marginLeft: 10 }}>

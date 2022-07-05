@@ -13,10 +13,11 @@ import { colors, gap, shadow, chat } from "../global";
 import { Icon } from "react-native-elements";
 import { Chat } from "../components";
 
-const ChatScreen = ({ navigation }) => {
+const ChatScreen = ({ navigation, route }) => {
   const [chatData, setChatData] = useState(chat);
   const [inpChat, setInpChat] = useState("");
   const flatListRef = useRef();
+
   function sendChat() {
     if (inpChat) {
       setChatData([
@@ -32,6 +33,10 @@ const ChatScreen = ({ navigation }) => {
       flatListRef.current.scrollToEnd();
     }
   }
+
+  function testEnter(e) {
+    console.log(e.nativeEvent.key === "Done");
+  }
   return (
     <View style={styles.container}>
       <View style={styles.navigationBack}>
@@ -42,7 +47,7 @@ const ChatScreen = ({ navigation }) => {
       <View style={styles.itemRequestedContainer}>
         <View style={styles.itemRequested}>
           <Image
-            source={require("../../assets/nonmakanan/shoe1.webp")}
+            source={route.params.data.avatar}
             style={{ width: 35, height: 35, resizeMode: "cover" }}
           />
           <View style={styles.pickUpDetail}>
@@ -96,14 +101,14 @@ const ChatScreen = ({ navigation }) => {
               <View style={styles.ownerDetail}>
                 <View style={styles.profileOwner}>
                   <Image
-                    source={require("../../assets/ava4.png")}
+                    source={route.params.data.avatar}
                     style={styles.ownerImage}
                   />
                 </View>
                 <Text
                   style={{ fontSize: 14, marginTop: 10, fontWeight: "500" }}
                 >
-                  Jhon Doe
+                  {route.params.data.username}
                 </Text>
                 <View
                   style={{
@@ -135,6 +140,8 @@ const ChatScreen = ({ navigation }) => {
           placeholder="ketik pesan"
           style={styles.inputChat}
           value={inpChat}
+          on
+          onKeyPress={testEnter}
           onChangeText={(e) => setInpChat(e)}
         />
         <Pressable
