@@ -4,6 +4,7 @@ import MapViews from "./MapViews";
 import Header from "./Header";
 import Chat from "./Chat";
 import ChatList from "./ChatList";
+import Input from "./Input";
 
 export {
   CardItem,
@@ -12,4 +13,5 @@ export {
   Header,
   Chat,
   ChatList,
+  Input,
 };
