@@ -47,12 +47,12 @@ const ChatScreen = ({ navigation, route }) => {
       <View style={styles.itemRequestedContainer}>
         <View style={styles.itemRequested}>
           <Image
-            source={route.params.data.avatar}
+            source={route.params.data.images[0]}
             style={{ width: 35, height: 35, resizeMode: "cover" }}
           />
           <View style={styles.pickUpDetail}>
             <Text style={{ fontSize: 12, fontWeight: "500" }}>
-              Colorful Sneaker Shoes size 42
+              {route.params.data.itemName}
             </Text>
             <View style={styles.pickUp}>
               <Icon
@@ -101,7 +101,7 @@ const ChatScreen = ({ navigation, route }) => {
               <View style={styles.ownerDetail}>
                 <View style={styles.profileOwner}>
                   <Image
-                    source={route.params.data.avatar}
+                    source={route.params.data.userAva}
                     style={styles.ownerImage}
                   />
                 </View>

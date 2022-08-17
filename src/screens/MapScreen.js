@@ -23,6 +23,7 @@ const MapScreen = ({ navigation }) => {
   });
   const [dataRendered, setDataRendered] = React.useState(itemDatas);
   const _map = React.useRef();
+
   //user location useeffect
   // React.useEffect(() => {
   //   (async () => {
@@ -54,23 +55,23 @@ const MapScreen = ({ navigation }) => {
   // }, []);
   //another example to use permission
 
-  const checkPermission = async () => {
-    const permissionStatus = await Location.requestForegroundPermissionsAsync();
-    if (permissionStatus.status === "granted") {
-      // const permission = await askPermission();
-      // return permission;
-      const {
-        coords: { latitude, longitude },
-      } = await Location.getCurrentPositionAsync();
-      setPosition({
-        latitudeDelta: 0.008,
-        longitudeDelta: 0.008,
-        latitude,
-        longitude,
-      });
-    }
-    return;
-  };
+  // const checkPermission = async () => {
+  //   const permissionStatus = await Location.requestForegroundPermissionsAsync();
+  //   if (permissionStatus.status === "granted") {
+  //     const permission = await askPermission();
+  //     return permission;
+  //     const {
+  //       coords: { latitude, longitude },
+  //     } = await Location.getCurrentPositionAsync();
+  //     setPosition({
+  //       latitudeDelta: 0.008,
+  //       longitudeDelta: 0.008,
+  //       latitude,
+  //       longitude,
+  //     });
+  //   }
+  //   return;
+  // };
 
   // const askPermission = async () => {
   //   const permission = await Location.requestForegroundPermissionsAsync();
@@ -86,26 +87,34 @@ const MapScreen = ({ navigation }) => {
       const {
         coords: { latitude, longitude },
       } = await Location.getCurrentPositionAsync();
-      setPosition({
-        latitudeDelta: 0.008,
-        longitudeDelta: 0.008,
-        latitude,
-        longitude,
+      setPosition((state) => {
+        goToMyLocation({
+          latitudeDelta: 0.008,
+          longitudeDelta: 0.008,
+          latitude,
+          longitude,
+        });
+        return {
+          latitudeDelta: 0.008,
+          longitudeDelta: 0.008,
+          latitude,
+          longitude,
+        };
       });
+      console.log(position);
     } catch (err) {
       console.log(err);
     }
   };
 
   React.useEffect(() => {
-    checkPermission();
+    // checkPermission();
     getLocation();
-    goToMyLocation();
   }, []);
 
   //animate to user location
-  const goToMyLocation = async () => {
-    _map.current.animateToRegion(position, 1000);
+  const goToMyLocation = (coordinateAnimate) => {
+    _map.current.animateToRegion(coordinateAnimate, 1000);
   };
 
   return (
@@ -116,6 +125,9 @@ const MapScreen = ({ navigation }) => {
           dataSend={itemDatas}
           dataShown={(data) => setDataRendered(data)}
         />
+        <Pressable onPress={goToMyLocation}>
+          <Text>press</Text>
+        </Pressable>
       </View>
       {position && (
         <View style={{ flex: 1 }}>
